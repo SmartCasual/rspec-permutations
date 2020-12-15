@@ -4,4 +4,6 @@
 
 ### New features
 
-Initial gem creation.
+- Initial gem creation.
+- Configuring RuboCop
+- Adding RSpec
