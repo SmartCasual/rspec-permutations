@@ -1,5 +1,7 @@
 # Rspec::Permutations
 
+[![SmartCasual](https://circleci.com/gh/SmartCasual/rspec-permutations.svg?style=svg)](https://app.circleci.com/pipelines/github/SmartCasual/rspec-permutations)
+
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rspec/permutations`. To experiment with that code, run `bin/console` for an interactive prompt.
 
 TODO: Delete this and the text above, and describe your gem
