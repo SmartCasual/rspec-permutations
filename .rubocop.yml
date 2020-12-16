@@ -47,7 +47,16 @@ Style/SwapValues: # (new in 1.1)
 # Alterations
 Naming/RescuedExceptionsVariableName:
   Enabled: false
+Style/BlockComments:
+  Exclude:
+    - spec/**/*
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+Style/Documentation:
+  Enabled: false
 Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/MultilineMethodCallIndentation:
   Enabled: false
 Style/StringLiterals:
   EnforcedStyle: double_quotes

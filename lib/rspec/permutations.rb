@@ -1,8 +1,11 @@
 require_relative "permutations/version"
 
-module Rspec
-  module Permutations
-    class Error < StandardError; end
-    # Your code goes here...
+module RSpec::Permutations
+  require_relative "permutations/hook"
+
+  RSpec.configure do |config|
+    config.extend(RSpec::Permutations::Hook)
   end
+
+  class Error < StandardError; end
 end
