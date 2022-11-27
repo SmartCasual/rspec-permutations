@@ -5,9 +5,9 @@ module RSpec
     module Hook
       def permutations(name = nil, &block)
         Loader.new(name).permutations.each do |permutation|
-          context("with permutation #{permutation.original}") do
+          context("with permutation #{permutation}") do
             permutation.each do |key, value|
-              let(key.to_sym) { value }
+              let(key.to_sym) { instance_eval(value) }
             end
 
             instance_eval(&block)

@@ -1,7 +1,8 @@
 PATH
   remote: .
   specs:
-    rspec-permutations (0.0.0)
+    rspec-permutations (1.0.0)
+      rspec (~> 3)
 
 GEM
   remote: https://rubygems.org/

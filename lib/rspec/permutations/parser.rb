@@ -1,3 +1,5 @@
+require_relative "permutation"
+
 module RSpec
   module Permutations
     class Parser
@@ -17,14 +19,14 @@ module RSpec
 
       def permutation_blocks
         @permutation_blocks ||= File.read(@spec_file)
-          .scan(/^=begin\s+(.*?)\n(.*?)=end$/m)
+          .scan(/^=begin(?:[[:blank:]]+([^\n]+))?\n(.*?)=end$/m)
           .map do |name, table|
             PermutationBlock.new(name, table)
           end
       end
 
       class PermutationBlock
-        def initialize(name, table)
+        def initialize(name = nil, table)
           @name = name
           @permutations = Table.parse(table)
         end
@@ -63,15 +65,6 @@ module RSpec
               .reverse
           end
         end
-      end
-
-      class Permutation < Hash
-        def initialize(original)
-          super()
-          @original = original.gsub(/ +/, " ")
-        end
-
-        attr_reader :original
       end
     end
   end
