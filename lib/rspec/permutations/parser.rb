@@ -21,12 +21,12 @@ module RSpec
         @permutation_blocks ||= File.read(@spec_file)
           .scan(/^=begin(?:[[:blank:]]+([^\n]+))?\n(.*?)=end$/m)
           .map do |name, table|
-            PermutationBlock.new(name, table)
+            PermutationBlock.new(table, name: name)
           end
       end
 
       class PermutationBlock
-        def initialize(name = nil, table)
+        def initialize(table, name: nil)
           @name = name
           @permutations = Table.parse(table)
         end
@@ -37,15 +37,13 @@ module RSpec
       class Table
         class << self
           def parse(raw_table)
-            headers, *rows = raw_table.strip.split("\n")
-            headers = headers.strip.split("|").map(&:strip)
-            headers = strip_start_and_end_blanks(headers)
+            headers_row, *value_rows = raw_table.strip.split("\n")
+            headers = split_row(headers_row)
 
-            rows.map do |row|
-              values = row.strip.split("|").compact.map(&:strip)
-              values = strip_start_and_end_blanks(values)
+            value_rows.map do |value_row|
+              values = split_row(value_row)
 
-              headers.each.with_object(Permutation.new(row)).with_index do |(header, hash), index|
+              headers.each.with_object(Permutation.new).with_index do |(header, hash), index|
                 hash[header] = values[index]
               end
             end
@@ -57,8 +55,11 @@ module RSpec
             string.nil? || string == ""
           end
 
-          def strip_start_and_end_blanks(array)
-            array
+          def split_row(row)
+            row
+              .strip
+              .split("|")
+              .map(&:strip)
               .drop_while { |s| blank?(s) }
               .reverse
               .drop_while { |s| blank?(s) }

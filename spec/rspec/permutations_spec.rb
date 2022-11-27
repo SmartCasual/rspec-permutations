@@ -69,7 +69,7 @@ RSpec.describe RSpec::Permutations do
 
   permutations "Booleans" do
     it "behaves predictably with booleans" do
-      expect(boolean).to eq(true)
+      expect(boolean).to be(true)
     end
   end
 
@@ -81,7 +81,7 @@ RSpec.describe RSpec::Permutations do
 
   permutations "Hashes" do
     it "behaves predictably with hashes" do
-      expect(hash).to eq({a: 1})
+      expect(hash).to eq(a: 1)
     end
   end
 

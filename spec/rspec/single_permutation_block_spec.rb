@@ -6,7 +6,7 @@
 
 require "rspec/permutations"
 
-RSpec.describe "A single permutation block" do
+RSpec.describe "A single permutation block" do # rubocop:disable RSpec/DescribeClass
   permutations do
     it "is equal" do
       expect(testing).to eq(testing2)
