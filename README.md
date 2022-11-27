@@ -28,15 +28,52 @@ Define a permutation group in your spec file, then use the `permutations` method
 
 ```ruby
 =begin
-| a | b | c        |
-| 1 | 2 | "apple"  |
-| 2 | 3 | "banana" |
+| a     | b     | result   |
+| 1     | 2     | 3        |
+| 2.0   | 3     | 5.0      |
+| "car" | "pet" | "carpet" |
 =end
 
-RSpec.describe SomeClass do
+RSpec.describe "An example with the + method" do
   permutations do
-    it "does something" do
-      # a, b, and c are available here
+    it "combines `a` and `b`" do
+      expect(a + b).to eq(result)
+    end
+  end
+end
+```
+
+This would be the equivalent to writing:
+
+```ruby
+RSpec.describe "An example with the + method" do
+  context "with permutation a: 1, b: 2, result: 3" do
+    let(:a) { 1 }
+    let(:b) { 2 }
+    let(:result) { 3 }
+
+    it "combines `a` and `b`" do
+      expect(a + b).to eq(result)
+    end
+  end
+
+  context "with permutation a: 2.0, b: 3, result: 5.0" do
+    let(:a) { 2.0 }
+    let(:b) { 3 }
+    let(:result) { 5.0 }
+
+    it "combines `a` and `b`" do
+      expect(a + b).to eq(result)
+    end
+  end
+
+  context "with permutation a: 'car', b: 'pet', result: 'carpet'" do
+    let(:a) { "car" }
+    let(:b) { "pet" }
+    let(:result) { "carpet" }
+
+    it "combines `a` and `b`" do
+      expect(a + b).to eq(result)
     end
   end
 end
